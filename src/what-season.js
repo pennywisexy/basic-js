@@ -8,27 +8,27 @@ module.exports = function getSeason(date) {
     "autumn",
   ];
 
-  if (date instanceof Date) {
+  if (date instanceof Date  &&  !isNaN(date)) {
     let month = date.getMonth();
     switch (month) {
       case 0:
       case 1:
       case 11:
-        return console.log(winter);
+        return winter;
       case 2:
       case 3:
       case 4:
-        return console.log(spring);
+        return spring;
       case 5:
       case 6:
       case 7:
-        return console.log(summer);
+        return summer;
       case 8:
       case 9:
       case 10:
-        return console.log(autumn);
+        return autumn;
       default:
-        return false;
+        return "Unable to determine the time of year!";
     }
-  } else return console.log("Unable to determine the time of year!");
+  } else return "Unable to determine the time of year!";
 };
