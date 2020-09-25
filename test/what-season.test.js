@@ -275,7 +275,7 @@ describe('What season', () => {
                     res = 'THROWN';
                   }
             }
-            assert.equal(res, 'THROWN');
+            assert. equal(res, 'THROWN');
         });
     });
 });

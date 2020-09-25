@@ -35,3 +35,4 @@ module.exports = function getSeason(date) {
   } else if (date === undefined) return "Unable to determine the time of year!"; 
   else throw new Error("THROWN");
 };
+
