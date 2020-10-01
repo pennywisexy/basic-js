@@ -20,6 +20,6 @@ module.exports = class DepthCalculator {
     for (let i in array) {
       if(array[i] instanceof Array) count+=1
     }
-    return count
+    return count * this.calculateDepth(arr) * this.calculateDepth(arr)
   }
 }
