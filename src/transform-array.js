@@ -1,7 +1,9 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function transform(array) {
-  let arr = array;
+  let arr = [];
+  arr = array.filter(a => arr.push(a));
+  let oldArr = [];
   let newArr = []
   const [discardNext, 
          discardPrev, 
@@ -11,15 +13,17 @@ module.exports = function transform(array) {
                         '--double-next', 
                         '--double-prev'];
 
-  if (array.length === 0) return array;
+  oldArr = arr.filter(a => a === discardNext || a === discardPrev || a === doubleNext || a === doublePrev)
+  if(oldArr.length === 0) return array;
+
   if(Array.isArray(arr)) {
 newArr = arr.reduce(function (b, a) {
     switch (a) {
       case discardNext:
-        arr[arr.indexOf(a) + 1] = '2213123123123123'
+        delete arr[(arr.indexOf(a) + 1)]
         return arr
       case discardPrev:
-        arr[arr.indexOf(a) - 1] = '12121123123123'
+        delete arr[(arr.indexOf(a) - 1)]
         return arr
       case doubleNext:
         arr[arr.indexOf(a)] = arr[arr.indexOf(a) + 1]
@@ -30,7 +34,7 @@ newArr = arr.reduce(function (b, a) {
     }
     return arr
   })
-  return newArr.filter(a => typeof(a) === 'number' );
+  return newArr.filter(a => a !== discardNext && a !== discardPrev && a !== doubleNext && a !== doublePrev && a !== undefined);
   }else throw new Error('Error')
 
   
