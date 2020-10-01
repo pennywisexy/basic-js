@@ -3,7 +3,7 @@ const CustomError = require("../extensions/custom-error");
 module.exports = class DepthCalculator {
   calculateDepth(arr) {
     let oldArr = arr;
-    let array = [];
+    let array;
     let count = 0;
 
     if (arr.length === 0) {
@@ -17,7 +17,9 @@ module.exports = class DepthCalculator {
         return depth;
       }, []);
     }
-    console.log(array[0])
+    for (let i in array) {
+      if(array[i] instanceof Array) count+=1
+    }
     return count
   }
 }
