@@ -13,10 +13,11 @@ module.exports = class DepthCalculator {
       count++
       arr = arr.reduce((depth, elem) => {
         if (elem instanceof Array) depth.push(...elem);
+        depth.length >= 1 ? array = depth : depth
         return depth;
       }, []);
     }
-    console.log(arr)
+    console.log(array[0])
     return count
   }
 }
