@@ -17,7 +17,7 @@ module.exports = function transform(array) {
   if(oldArr.length === 0) return array;
 
   if(Array.isArray(arr)) {
-newArr = arr.reduce(function (b, a) {
+newArr = arr.map(function (a) {
     switch (a) {
       case discardNext:
         delete arr[(arr.indexOf(a) + 1)]
@@ -32,9 +32,9 @@ newArr = arr.reduce(function (b, a) {
         arr[arr.indexOf(a)] = arr[arr.indexOf(a) - 1]
         return arr
     }
-    return arr
+    return arr;
   })
-  return newArr.filter(a => a !== discardNext && a !== discardPrev && a !== doubleNext && a !== doublePrev && a !== undefined);
+  return newArr[0].filter(a => a !== discardNext && a !== discardPrev && a !== doubleNext && a !== doublePrev && a !== undefined);
   }else throw new Error('Error')
 
   
