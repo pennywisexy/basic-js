@@ -15,7 +15,8 @@ const CustomError = require("../extensions/custom-error");
     removeLink(position) {
       if (position >= 0) {
         this.value =  this.value.split('|||')
-        this.value.splice((position), 1)
+        this.value = this.value.filter(a => a !== '')
+        delete this.value[position-1]
         this.value = this.value.join('|||')
         return this
       }else throw new Error ('THROWN')
