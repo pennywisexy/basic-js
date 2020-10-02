@@ -17,25 +17,28 @@ module.exports = function transform(array) {
   if(oldArr.length === 0) return array;
 
   if(Array.isArray(arr)) {
-newArr = arr.map(function (a) {
-    switch (a) {
-      case discardNext:
-        delete arr[(arr.indexOf(a) + 1)]
-        return arr
-      case discardPrev:
-        delete arr[(arr.indexOf(a) - 1)]
-        return arr
-      case doubleNext:
-        arr[arr.indexOf(a)] = arr[arr.indexOf(a) + 1]
-        return arr
-      case doublePrev:
-        arr[arr.indexOf(a)] = arr[arr.indexOf(a) - 1]
-        return arr
-    }
-    return arr;
-  })
-  return newArr[0].filter(a => a !== discardNext && a !== discardPrev && a !== doubleNext && a !== doublePrev && a !== undefined);
+    newArr = arr.reduce((total, amount, index, arr) => {
+      if(amount === discardNext) {
+        arr[index + 1] = discardPrev;
+        total.concat(arr[index + 1]);
+        return total;
+      }
+      if(amount === discardPrev) {
+        arr[index - 1] = discardPrev;
+        total.concat(arr[index - 1]);
+        return total;
+      }
+      if(amount === doubleNext) {
+        
+        arr[index] = arr[index + 1]
+        return total;
+      }
+      if(amount === doublePrev) {
+        arr[index] = arr[index - 1]
+        return total;
+      } 
+      return total
+    }, []);
+  return arr.filter(a => a !== discardNext && a !== discardPrev && a !== doubleNext && a !== doublePrev && a !== undefined);
   }else throw new Error('Error')
-
-  
 };
