@@ -14,10 +14,15 @@ const CustomError = require("../extensions/custom-error");
     },
     removeLink(position) {
       if (position >= 0) {
-        this.value =  this.value.split('|||')
-        this.value = this.value.filter(a => a !== '')
-        delete this.value[position-1]
-        this.value = this.value.join('|||')
+
+        
+        
+        this.value =  this.value.split('|||');
+        this.value = this.value.filter(a => a !== '');
+        if (this.value[position-1] === undefined) this.value = '';
+        delete this.value[position-1];
+        this.value = this.value.join('|||');
+        
         return this
       }else throw new Error ('THROWN')
       
@@ -34,10 +39,10 @@ const CustomError = require("../extensions/custom-error");
       return newValue.toString();
     },
     clear () {
+      
       return this.value = ''
     }
+    
   };
-
-// console.log(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').finishChain())
-
+  
 module.exports = chainMaker;
