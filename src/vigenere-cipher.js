@@ -34,17 +34,20 @@ class VigenereCipheringMachine {
       if ((alphabet.indexOf(str[i]) + alphabet.indexOf(keyNew[i])) > 26) {
         encryptArr.push(alphabet[alphabet.indexOf(str[i]) + alphabet.indexOf(keyNew[i]) - 26])
       }else {
-        encryptArr.push(alphabet[alphabet.indexOf(str[i]) + alphabet.indexOf(keyNew[i])])
-      }
+        encryptArr.push(alphabet[alphabet.indexOf(str[i]) + alphabet.indexOf(keyNew[i])]);
+        if((alphabet.indexOf(str[i]) + alphabet.indexOf(keyNew[i])) === 26) {encryptArr[i] = 'A'};
+       }
     } 
-    
-    for (let j = 0; j < strOld.length; j++) {
+    for (let j = 0; j < str.length; j++) {
       if(strOld[j] === ' ') {
-        encryptArr.splice(j, 0, ' ')
+        encryptArr.splice(j, 0, ' ');
       }
     }
     
-    return encryptArr.join('') + '!'
+    for (let j = str.length+2; j < strOld.length; j++) {
+        encryptArr.push(strOld[j])
+    }
+    return (encryptArr.join(''));
   }    
 
   decrypt(encryptedMessage, key) {
@@ -56,8 +59,8 @@ class VigenereCipheringMachine {
   }
 }
 
-const directMachine = new VigenereCipheringMachine()
-console.log(directMachine.encrypt('Example of sequence: 1, 2, 3, 4.', 'lilkey'))
+// const directMachine = new VigenereCipheringMachine()
+// console.log(directMachine.encrypt('attack at dawn!', 'alphonse'))
 
 
 module.exports = VigenereCipheringMachine;
